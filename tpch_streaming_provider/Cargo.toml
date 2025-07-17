@@ -1,0 +1,16 @@
+[package]
+name = "tpch_streaming_provider"
+description = "TPC-H streaming table provider"
+readme = "README.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+async-trait.workspace = true
+datafusion.workspace = true
+futures.workspace = true
+tokio.workspace = true
+tpchgen.workspace = true
+tpchgen-arrow.workspace = true

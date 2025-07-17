@@ -1,0 +1,9 @@
+[package]
+name = "tpch_queries"
+edition.workspace = true
+license.workspace = true
+readme.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]

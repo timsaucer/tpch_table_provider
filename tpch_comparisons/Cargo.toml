@@ -1,0 +1,13 @@
+[package]
+name = "tpch_comparisons"
+edition.workspace = true
+license.workspace = true
+readme.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+datafusion.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread"] }
+tpch_queries.workspace = true
+tpch_streaming_provider.workspace = true
