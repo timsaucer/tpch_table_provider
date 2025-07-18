@@ -1,0 +1,17 @@
+[package]
+name = "tpch_partitioned_provider"
+edition.workspace = true
+license.workspace = true
+readme.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+ahash.workspace = true
+async-trait.workspace = true
+datafusion.workspace = true
+futures.workspace = true
+log.workspace = true
+tokio.workspace = true
+tpchgen.workspace = true
+tpchgen-arrow.workspace = true

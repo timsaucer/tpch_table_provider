@@ -8,6 +8,8 @@ version.workspace = true
 
 [dependencies]
 datafusion.workspace = true
-tokio = { workspace = true, features = ["rt-multi-thread"] }
+datafusion-tpch.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "rt"] }
 tpch_queries.workspace = true
+tpch_partitioned_provider.workspace = true
 tpch_streaming_provider.workspace = true

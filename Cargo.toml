@@ -1,5 +1,7 @@
 [workspace]
-members = [ "tpch_comparisons",
+members = [
+    "tpch_comparisons",
+    "tpch_partitioned_provider",
     "tpch_queries",
     "tpch_streaming_provider",
 ]
@@ -13,12 +15,16 @@ rust-version = "1.82.0"
 version = "0.1.0"
 
 [workspace.dependencies]
+ahash = "0.8.12"
 async-trait = "0.1.88"
 datafusion = "46.0.1"
+datafusion-tpch = { git = "https://github.com/clflushopt/datafusion-tpch" }
 futures = "0.3.31"
-tokio = { version = "1.46.1", features = ["macros", "rt", "sync"] }
+log = "0.4.27"
+tokio = { version = "1.46.1", features = ["macros", "rt-multi-thread", "sync"] }
 tpchgen = "1.1.1"
 tpchgen-arrow = "1.1.1"
 tpch_queries = { path = "tpch_queries" }
+tpch_partitioned_provider = { path = "tpch_partitioned_provider" }
 tpch_streaming_provider = { path = "tpch_streaming_provider" }
 

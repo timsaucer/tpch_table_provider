@@ -84,14 +84,6 @@ macro_rules! define_tpch_table_provider {
 
         impl $TABLE_PROVIDER_NAME {
             table_provider_new_fn!($USES_PARTITIONS);
-            // pub fn new(scale_factor: f64, target_partitions: i32) -> Self {
-            //     num_partition_streams!($USES_PARTITIONS);
-            //
-            //     Self {
-            //         scale_factor,
-            //         target_partitions,
-            //     }
-            // }
         }
 
         #[async_trait]

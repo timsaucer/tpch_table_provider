@@ -1113,6 +1113,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "datafusion-tpch"
+version = "0.1.0"
+source = "git+https://github.com/clflushopt/datafusion-tpch#b9a331bba3bb2de772342ca6af717fc036b6a61e"
+dependencies = [
+ "datafusion",
+ "datafusion-expr",
+ "tpchgen",
+ "tpchgen-arrow",
+]
+
+[[package]]
 name = "digest"
 version = "0.10.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2449,9 +2460,25 @@ name = "tpch_comparisons"
 version = "0.1.0"
 dependencies = [
  "datafusion",
+ "datafusion-tpch",
  "tokio",
+ "tpch_partitioned_provider",
  "tpch_queries",
  "tpch_streaming_provider",
+]
+
+[[package]]
+name = "tpch_partitioned_provider"
+version = "0.1.0"
+dependencies = [
+ "ahash",
+ "async-trait",
+ "datafusion",
+ "futures",
+ "log",
+ "tokio",
+ "tpchgen",
+ "tpchgen-arrow",
 ]
 
 [[package]]
