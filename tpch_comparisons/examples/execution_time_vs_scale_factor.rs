@@ -21,8 +21,6 @@ async fn query_execution_time(
     let ctx = SessionContext::new();
     let num_partitions = num_partitions as i32;
 
-
-
     let query = get_tpch_query(query_number).map_err(|err| exec_datafusion_err!("{err}"))?;
 
     let query_lines = query
@@ -59,14 +57,13 @@ async fn main() -> DataFusionResult<()> {
     for query in queries_of_interest {
         for num_partitions in partitions {
             for scale_factor in scale_factors {
-                let duration =
-                    query_execution_time(query, scale_factor, num_partitions).await?.as_micros();
+                let duration = query_execution_time(query, scale_factor, num_partitions)
+                    .await?
+                    .as_micros();
                 println!("{query},{scale_factor:3},{num_partitions},{duration}");
             }
         }
     }
-
-
 
     Ok(())
 }
