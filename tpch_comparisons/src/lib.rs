@@ -78,7 +78,6 @@ pub fn register_streaming_with_partitioned_tables(
         "lineitem",
         Arc::new(LineItemPartitionedProvider::new(
             scale_factor,
-            num_partitions,
         )),
     )?;
 

@@ -1,39 +1,23 @@
 use async_trait::async_trait;
-use datafusion::arrow::array::{
-    Date32Array, Decimal128Array, Int32Array, Int64Array, RecordBatch, StringViewArray,
-};
 use datafusion::arrow::compute::SortOptions;
 use datafusion::arrow::datatypes::SchemaRef;
 use datafusion::catalog::{Session, TableProvider};
-use datafusion::common::hash_utils::HashValue;
-use datafusion::common::{exec_datafusion_err, exec_err};
 use datafusion::datasource::TableType;
 use datafusion::error::Result as DataFusionResult;
-use datafusion::execution::{RecordBatchStream, SendableRecordBatchStream, TaskContext};
+use datafusion::execution::{SendableRecordBatchStream, TaskContext};
 use datafusion::logical_expr::Expr;
 use datafusion::physical_expr::expressions::Column;
 use datafusion::physical_expr::{
     EquivalenceProperties, LexOrdering, Partitioning, PhysicalExpr, PhysicalSortExpr,
 };
 use datafusion::physical_plan::execution_plan::{Boundedness, EmissionType};
-use datafusion::physical_plan::limit::LimitStream;
-use datafusion::physical_plan::metrics::BaselineMetrics;
 use datafusion::physical_plan::stream::RecordBatchStreamAdapter;
-use datafusion::physical_plan::streaming::{PartitionStream, StreamingTableExec};
 use datafusion::physical_plan::{DisplayAs, DisplayFormatType, ExecutionPlan, PlanProperties};
-use futures::Stream;
 use futures::StreamExt;
 use std::any::Any;
 use std::fmt::Formatter;
-use std::pin::Pin;
 use std::sync::Arc;
-use std::task::{Context, Poll};
-use tokio::runtime::Handle;
-use tokio::sync::mpsc::{Receiver, Sender};
-use tokio::sync::Notify;
-use tokio::task::JoinHandle;
-use tpchgen::generators::{LineItem, LineItemGenerator, LineItemGeneratorIterator};
-use tpchgen_arrow::conversions::{decimal128_array_from_iter, to_arrow_date32};
+use tpchgen::generators::LineItemGenerator;
 use tpchgen_arrow::{LineItemArrow, RecordBatchIterator};
 
 #[derive(Debug)]
@@ -173,13 +157,11 @@ impl ExecutionPlan for LineItemPartitionedExec {
 #[derive(Debug)]
 pub struct LineItemPartitionedProvider {
     scale_factor: f64,
-    target_partitions: i32,
 }
 impl LineItemPartitionedProvider {
-    pub fn new(scale_factor: f64, target_partitions: i32) -> Self {
+    pub fn new(scale_factor: f64) -> Self {
         Self {
             scale_factor,
-            target_partitions,
         }
     }
 }

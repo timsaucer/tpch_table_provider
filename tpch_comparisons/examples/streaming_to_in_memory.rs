@@ -69,38 +69,8 @@ async fn query_execution_time(
     Ok(duration)
 }
 
-async fn print_outs() -> DataFusionResult<()> {
-    let cols = [
-        "l_returnflag",
-        "l_linestatus",
-        "l_quantity",
-        "l_extendedprice",
-        "l_discount",
-        "l_tax",
-        "l_shipdate",
-    ];
-    {
-        let ctx = SessionContext::new();
-        register_in_memory_tables(&ctx, 0.1)?;
-        ctx.table("lineitem").await?.show_limit(5).await?;
-    }
-
-    {
-        let ctx = SessionContext::new();
-        register_streaming_with_partitioned_tables(&ctx, 0.1, 2)?;
-        ctx.table("lineitem")
-            .await?
-            .select_columns(&cols)?
-            .show_limit(5)
-            .await?;
-    }
-
-    Ok(())
-}
-
 #[tokio::main]
 async fn main() -> DataFusionResult<()> {
-    print_outs().await?;
 
     // let queries_of_interest = [9, 21, 2, 20, 17];
     let queries_of_interest = (1..23).collect::<Vec<_>>();
